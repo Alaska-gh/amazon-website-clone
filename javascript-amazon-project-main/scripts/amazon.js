@@ -4,7 +4,7 @@ import {cart, addToCart, calculateCartItems} from '../data/cart.js'
 
 // calling the function to display cart quantity on page load
 renderCartQuantity();
-
+ 
 // generated html for products
 let productsHTML = '';
 products.forEach((product) => {
