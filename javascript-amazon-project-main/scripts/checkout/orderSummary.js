@@ -1,9 +1,10 @@
 import {cart, calculateCartItems, removeItem, updateCartQuantity, updateDeliveryOption} from '../../data/cart.js';
 import { getProduct} from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import deliveryOptions, { getDeliveryOption } from '../../data/deliveryOptions.js';
-import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.11.13/+esm'
+import {deliveryOptions, getDeliveryOption, getDeliveryDay} from '../../data/deliveryOptions.js';
+
 import { renderPaymentSummary } from './paymentSummary.js';
+import { renderCheckoutItems } from './checkoutHeader.js';
 
 renderOrderSummary();
 
@@ -64,7 +65,7 @@ cart.forEach((cartItem) =>{
             </div>
           </div>`
   document.querySelector('.js-order-summary').innerHTML = cartItemHTML;
-  updateCheckOutItems();
+  renderCheckoutItems();
   deleteItemsFromCart();
   updateCartItems();
 });
@@ -96,8 +97,8 @@ cart.forEach((cartItem) =>{
             }
             updateCartQuantity(productId, newQuantity);
             renderPaymentSummary();
-            document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity;
-             updateCheckOutItems();
+            renderOrderSummary();
+             renderCheckoutItems();
              container.classList.remove('is-edditing-quantity');
           })
         })
@@ -110,7 +111,8 @@ cart.forEach((cartItem) =>{
     btn.addEventListener('click', ()=>{
       const {productId} = btn.dataset;
       removeItem(productId);
-      updateCheckOutItems();
+      renderCheckoutItems();
+    
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
       renderPaymentSummary();
@@ -167,21 +169,5 @@ function deliveryOptionsHTML(matchingProduct, cartItem){
       })
     });
 
-  // a function to get delivery day
-  function getDeliveryDay(deliveryOption){
-    const today = dayjs();
-    const deliveryDate = today.add(
-      deliveryOption.deliveryDays,
-      'days'
-    );
-    const dateString = deliveryDate.format('dddd, MMMM D');
-    return dateString;
-  }
-
 }
 
-  // a function to display the number of items in the checkout page
-export function updateCheckOutItems(){
-     const checkoutItems = calculateCartItems();
-     document.querySelector('.js-checkout-items').innerHTML = `${checkoutItems} Items`;
-  }

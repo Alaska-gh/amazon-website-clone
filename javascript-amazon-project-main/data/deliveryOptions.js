@@ -1,3 +1,4 @@
+import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.11.13/+esm'
 // this function taks a delivery options id as an argument and finds a matching option in the delivery options
 export function getDeliveryOption(deliveryOptionId){
   let deliveryOption;
@@ -29,3 +30,26 @@ export const deliveryOptions = [
 ]
 
 export default deliveryOptions;
+
+  // a function to get delivery day
+  export function getDeliveryDay(deliveryOption){
+    let deliveryDate = dayjs();
+    let reemainingDays = 
+      deliveryOption.deliveryDays;
+
+      while(reemainingDays > 0){
+        deliveryDate = deliveryDate.add(1, 'day');
+
+        if(!isWeekend(deliveryDate)){
+          reemainingDays--
+        }
+      }
+ 
+    const dateString = deliveryDate.format('dddd, MMMM D');
+    return dateString;
+  }
+
+  function isWeekend(date){
+    const dayOfWeek = date.format('dddd');
+    return dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday';
+  }
