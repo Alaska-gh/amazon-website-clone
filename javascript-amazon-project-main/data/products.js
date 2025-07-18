@@ -1,3 +1,4 @@
+// thsi function take a ptoduct id a ana argument and loops through the products to find a matching ptoduct
 export function getProduct(productId){
    let matchingProduct;
     products.forEach((product) =>{
@@ -8,6 +9,7 @@ export function getProduct(productId){
     return matchingProduct;
 }
 
+// the data for all the products
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",

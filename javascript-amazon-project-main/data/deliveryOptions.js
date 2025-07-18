@@ -1,3 +1,4 @@
+// this function taks a delivery options id as an argument and finds a matching option in the delivery options
 export function getDeliveryOption(deliveryOptionId){
   let deliveryOption;
   deliveryOptions.forEach((option) => {
@@ -8,6 +9,7 @@ export function getDeliveryOption(deliveryOptionId){
  return deliveryOption || deliveryOptions[0];
 }
 
+// data for all the delivery options available
 export const deliveryOptions = [
   {
     id: '1',

@@ -3,6 +3,7 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 
+// a function to display the payment summary on the page
 export function renderPaymentSummary(){
   let productPriceCents = 0;
   let shippingPriceCents = 0;
@@ -25,6 +26,7 @@ export function renderPaymentSummary(){
 
   const items = calculateCartItems()
  
+  // generating the html for the payment summary
  const paymentSummaryHTML = 
   `
    <div class="payment-summary-title">
