@@ -53,7 +53,7 @@ export function updateCartQuantity(productId, newQuantity){
   cart.forEach((item) => {
     if(item.productId === productId){
      item.quantity = newQuantity
-    }
+    } 
 
   })
   saveCartToStorage();
